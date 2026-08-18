@@ -1,0 +1,9 @@
+{
+  "name": "seonaut-vercel-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vercel edge reverse-proxy that fronts an externally-hosted SEOnaut instance.",
+  "engines": {
+    "node": ">=18"
+  }
+}
