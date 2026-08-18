@@ -1,0 +1,41 @@
+app = "seonaut-app-rg"
+primary_region = "iad"
+
+[build]
+
+[env]
+  SEONAUT_SERVER_HOST = "0.0.0.0"
+  SEONAUT_SERVER_PORT = "9000"
+  SEONAUT_SERVER_URL = "https://seonaut-app-rg.fly.dev"
+  SEONAUT_DATABASE_SERVER = "seonaut-mysql-rg.internal"
+  SEONAUT_DATABASE_PORT = "3306"
+  SEONAUT_DATABASE_USER = "seonaut"
+  SEONAUT_DATABASE_DATABASE = "seonaut"
+  WAIT_HOSTS = "seonaut-mysql-rg.internal:3306"
+  WAIT_TIMEOUT = "120"
+  WAIT_SLEEP_INTERVAL = "5"
+  WAIT_HOST_CONNECT_TIMEOUT = "10"
+
+[processes]
+  app = "sh -c '/bin/wait && /app/seonaut'"
+
+[[services]]
+  processes = ["app"]
+  internal_port = 9000
+  protocol = "tcp"
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

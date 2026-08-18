@@ -1,5 +1,10 @@
 # Deploying this SEOnaut fork with Vercel
 
+**Live example deployment:** backend on Fly.io at `seonaut-app-rg.fly.dev`
+(Go app + MySQL 8.4, see `fly.toml`), fronted by the Vercel proxy in
+`vercel-proxy/` at `https://seo-audit-risegenie.vercel.app`. The steps below
+reproduce this setup.
+
 SEOnaut is a stateful Go web server: it runs a background crawler with
 long-lived worker goroutines and requires a MySQL database. None of that fits
 Vercel's serverless model (short-lived, stateless functions with no

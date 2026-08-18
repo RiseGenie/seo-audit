@@ -18,8 +18,10 @@ const HOP_BY_HOP_RESPONSE_HEADERS = new Set([
   'set-cookie',
 ]);
 
+const DEFAULT_BACKEND_URL = 'https://seonaut-app-rg.fly.dev';
+
 export default async function handler(req, res) {
-  const backendOrigin = process.env.SEONAUT_BACKEND_URL;
+  const backendOrigin = process.env.SEONAUT_BACKEND_URL || DEFAULT_BACKEND_URL;
   if (!backendOrigin) {
     res.statusCode = 500;
     res.end('SEONAUT_BACKEND_URL environment variable is not set.');
